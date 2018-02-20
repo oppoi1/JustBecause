@@ -1,0 +1,25 @@
+<% include ./partials/header %>
+
+<div class="container">
+    <div class="row">
+        <p class="lead">
+            JustBecause: <%=contract.title%>
+        </p>
+    <div class="col-md-9">
+        <div class="caption-full">
+            <p>Erstellt durch: <em><%=contract.createdBy.username%></em></p>
+            <p>Kontaktperson: <%=contract.contactPerson%></p>
+
+            <p>Zuständige Person: <%=contract.inCharge%></p>
+            <p>Vertragsende: <%=contract.expiration.toDateString()%></p>
+            <p>Erinnerungsdatum: <%=contract.reminderDate.toDateString()%></p>
+            <p>Erstellt am: <%=contract.created.toDateString()%></p>
+        </div>
+    <a class="btn btn-warning" href="/contracts/<%=contract._id%>/edit">Bearbeiten</a>
+    <form id="delete" action="/contracts/<%=contract._id%>?_method=DELETE" method="POST">
+        <input type="submit" class="btn btn-danger" value="Löschen">
+    </form>
+    </div>
+</div>
+
+<% include ./partials/footer %>

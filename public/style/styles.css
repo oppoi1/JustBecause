@@ -1,0 +1,10 @@
+#delete {
+    display: inline;
+}
+.center {
+    text-align: center;
+}
+.widthauto {
+    width: 30%;
+    margin: 24px auto;
+}

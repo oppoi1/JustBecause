@@ -15,6 +15,9 @@
             <div class="container-fluid">
                 <div class="navbar-header">
                     <a class="navbar-brand" href="/">JustBecause</a>
+                    <% if(currentUser) { %>
+                        <a class="navbar-brand" href="/">Hallo <%=currentUser.username %></a>
+                    <%} %>
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
@@ -22,7 +25,7 @@
                             <li><a href="/login">Login</a></li>
                             <li><a href="/register">Sign Up</a></li>
                         <% }else{ %>
-                            <li><a href="/profile">Signed in as <%=currentUser.username %></a></li>
+                            <li><a href="/profile">Meine Verträge</a></li>
                             <li><a href="/contracts/new">neuer Vertrag</a></li>
                             <li><a href="/logout">Logout</a></li>
                         <% } %>

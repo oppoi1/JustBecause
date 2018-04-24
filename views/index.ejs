@@ -22,12 +22,12 @@
         <% contracts.forEach((contract) => { %>
             <tr>
                 <td><a href="/contracts/<%= contract._id %>"><%=contract.title%></a></td>
-                <td><%=contract.contactPerson%></td>
-                <td><%=contract.inCharge%></td>
-                <td><%=contract.category%></td>
-                <td><%=contract.expiration.toDateString()%></td>
-                <td><%=contract.created.toDateString()%></td>
-                <td><%=contract.createdBy.username%></td>
+                <td><%= contract.contactPerson            %></td>
+                <td><%= contract.inCharge                 %></td>
+                <td><%= contract.category                 %></td>
+                <td><%= contract.expiration.toDateString()%></td>
+                <td><%= contract.created.toDateString()   %></td>
+                <td><%= contract.createdBy.username       %></td>
                 <td><a href="/contracts/<%= contract._id %>" class="btn btn-primary">Bearbeiten</a></td>
             </tr>
         <% }); %>
@@ -40,7 +40,7 @@
     $('#contractTable').DataTable({
         "aaSorting": [[ 3, "desc" ]], // sort by third column descending
     });
-} );
+});
 </script>
 
 <% include ./partials/footer %>

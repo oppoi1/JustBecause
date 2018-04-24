@@ -12,6 +12,7 @@
                 <th>Vertragsname/-nummer</th>
                 <th>Kontaktperson</th>
                 <th>Zustaendige Person</th>
+                <th>Kategorie</th>
                 <th>Vertragsende</th>
                 <th>Erstellt am</th>
                 <th>Erstellt durch</th>
@@ -23,6 +24,7 @@
                 <td><a href="/contracts/<%= contract._id %>"><%=contract.title%></a></td>
                 <td><%=contract.contactPerson%></td>
                 <td><%=contract.inCharge%></td>
+                <td><%=contract.category%></td>
                 <td><%=contract.expiration.toDateString()%></td>
                 <td><%=contract.created.toDateString()%></td>
                 <td><%=contract.createdBy.username%></td>
@@ -36,7 +38,7 @@
 <script>
     $(document).ready(function() {
     $('#contractTable').DataTable({
-        "aaSorting": [[ 3, "desc" ]] // sort by third column descending
+        "aaSorting": [[ 3, "desc" ]], // sort by third column descending
     });
 } );
 </script>

@@ -9,9 +9,10 @@ const LocalStrategy  = require("passport-local");
 const methodOverride = require("method-override");
 const flash          = require("connect-flash");
 const User           = require("./models/user");
-const indexRoutes    = require("./routes/index");
-const mailing        = require("./mailer/index");
+const indexRoutes    = require("./routes/index"),
+      commentRoutes  = require('./routes/comments');
 const Contract       = require("./models/contract");
+const Comment        = require('./models/comment');
 
 // establish db connection
 mongoose.connect("mongodb://oppoi1:13371337@ds263367.mlab.com:63367/justbecause", {useMongoClient: true});
@@ -45,32 +46,30 @@ app.use((req, res, next) => {
 });
 
 // use routes
-app.use(indexRoutes);
-
-// initialize mailing
-mailing;
+app.use("/", indexRoutes);
+app.use("/contracts/:id/comments", commentRoutes);
 
 // send mail if date is closer than expiration date
-Contract.find({}, (err, contracts) => {
-    if (err) {
-        console.log(err);
-    } else {
-        setInterval(() => {
-            contracts.forEach((contract) => {
-                if(contract.expiration < Date.now) {
-                    mailing.smtpTransporter.sendMail(mailing.mail, (error, response) => {
-                        if(error) {
-                            console.log(error);
-                        } else {
-                            console.log("Message sent: " + response.message);
-                        }
-                        mailing.smtpTransporter.close();
-                    });
-                }
-            });
-        }, 43200000); // send reminder every 12 hours
-    }
-});
+// Contract.find({}, (err, contracts) => {
+//     if (err) {
+//         console.log(err);
+//     } else {
+//         setInterval(() => {
+//             contracts.forEach((contract) => {
+//                 if(contract.expiration < Date.now) {
+//                     mailing.smtpTransporter.sendMail(mailing.mail, (error, response) => {
+//                         if(error) {
+//                             console.log(error);
+//                         } else {
+//                             console.log("Message sent: " + response.message);
+//                         }
+//                         mailing.smtpTransporter.close();
+//                     });
+//                 }
+//             });
+//         }, 43200000); // send reminder every 12 hours
+//     }
+// });
 
 // seed db with dummy data
 /*Contract.create(
@@ -90,6 +89,6 @@ Contract.find({}, (err, contracts) => {
 */
 
 // listen to port
-app.listen(8080, () => {
+app.listen(8000, () => {
     console.log("Server started.");
 });

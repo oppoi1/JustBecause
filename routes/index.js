@@ -41,7 +41,6 @@ router.post("/contracts", middleware.isLoggedIn, (req, res) => {
     Contract.create(newContract, (err, newlyContract) => {
         if (err) {
             req.flash("error", "Contract couldn't be created. Please try again later.");
-            console.log(req.body);
             console.log(err);
         } else {
             // redirect
@@ -59,9 +58,6 @@ router.get("/contracts/new", (req, res) => {
                 console.log(err);
             } else {
                 res.render("new", {user: user, contracts: contracts});
-                contracts.forEach((el) => {
-                    console.log(el.contactPerson);
-                })
             }
         });
     });
@@ -70,7 +66,7 @@ router.get("/contracts/new", (req, res) => {
 // show route
 router.get("/contracts/:id", (req, res) => {
     // find contract with id
-    Contract.findById(req.params.id, (err, foundContract) => {
+    Contract.findById(req.params.id).populate('comments').exec((err, foundContract) => {
         if(err) {
             console.log(err);
         } else {
@@ -144,6 +140,17 @@ router.post("/login", passport.authenticate("local",
         failureRedirect: "/login",
     }), (req, res) => {
     req.flash("success", "Successfully logged in.");
+});
+
+// show login form
+router.get("/profile", (req, res) => {
+    Contract.find({}, (err, contracts) => {
+        if(err) {
+            console.log(err);
+        } else {
+            res.render("profile", {contract: contracts});
+        }
+    });
 });
 
 // logout route

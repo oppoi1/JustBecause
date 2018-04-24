@@ -11,13 +11,13 @@
                 </div>
                 <div class="form-group">
                     <label>Kontaktperson:</label>
-                    <select>
-                        <option value="Kontaktperson" selected="true" disabled="disabled">Kontaktperson</option>
+                    <!-- <select> -->
+                        <!-- <option value="Kontaktperson" selected="true" disabled="disabled">Kontaktperson</option>
                         <% contracts.forEach((contract) => { %>
                             <option value="<%= contract.contactPerson %>"><%= contract.contactPerson %></option>
                         <%}); %>
-                    </select>
-                    <!-- <input class="form-control" type="text" name="contract[contactPerson]" placeholder="Contract Person"> -->
+                    </select> -->
+                    <input class="form-control" type="text" name="contract[contactPerson]" placeholder="Contract Person">
                     <!--TODO: drop down menu with contacts - contact needs to be created-->
                 </div>
                 <div class="form-group">
@@ -30,6 +30,10 @@
                     </select>
                     <!-- <input class="form-control" type="text" name="contract[inCharge]" placeholder="Person who is in charge"> -->
                     <!--TODO: drop down menu with users-->
+                </div>
+                <div class="form-group">
+                    <label>Kategorie:</label>
+                    <input class="form-control" type="text" name="contract[category]" placeholder="Kategorie">
                 </div>
                 <div class="form-group">
                     <label>Vertragsende:</label>

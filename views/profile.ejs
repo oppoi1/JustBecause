@@ -1,0 +1,34 @@
+<% include ./partials/header %>
+
+<div class="container">
+        <h1> Vertragsübersicht User: <%= currentUser.username %></h1>
+        <table id="contractTable" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Vertragsname/-nummer</th>
+                    <th>Kontaktperson</th>
+                    <th>Zustaendige Person</th>
+                    <th>Vertragsende</th>
+                    <th>Erstellt am</th>
+                    <th>Erstellt durch</th>
+                    <th>Bearbeiten</th>
+                </tr>
+            </thead>
+            <% contract.forEach((contract) => { %>
+                <% if(currentUser.username == contract.inCharge) { %>
+                    <tr>
+                        <td><a href="/contracts/<%= contract._id %>"><%=contract.title%></a></td>
+                        <td><%=contract.contactPerson%></td>
+                        <td><%=contract.inCharge%></td>
+                        <td><%=contract.expiration.toDateString()%></td>
+                        <td><%=contract.created.toDateString()%></td>
+                        <td><%=contract.createdBy.username%></td>
+                        <td><a href="/contracts/<%= contract._id %>" class="btn btn-primary">Bearbeiten</a></td>
+                    </tr>
+                <% } %>
+            <% }); %>
+        </table>
+        <a class="btn btn-primary" href="/contracts/new">Vertrag hinzufügen</a>
+    </div>
+
+<% include ./partials/footer %>

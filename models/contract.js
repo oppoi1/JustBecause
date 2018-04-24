@@ -16,6 +16,7 @@ const contractSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
+    category: String,
     created:
     {
         type: Date,
@@ -27,7 +28,13 @@ const contractSchema = new mongoose.Schema({
             ref: "User"
         },
         username: String
-    }
+    },
+    comments: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Comment"
+        }
+    ]
 });
 
 module.exports = mongoose.model("Contract", contractSchema);

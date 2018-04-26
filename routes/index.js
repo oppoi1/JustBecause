@@ -1,10 +1,10 @@
 // requirements
-const express = require("express");
-const passport = require("passport");
-const router = express.Router();
-const User = require("../models/user");
-const middleware = require("../middleware/index");
-const Contract = require("../models/contract");
+const express = require("express"),
+     passport = require("passport"),
+       router = express.Router(),
+         User = require("../models/user"),
+   middleware = require("../middleware/index"),
+     Contract = require("../models/contract");
 
 // restful routes
 router.get("/", (req, res) => {
@@ -40,11 +40,11 @@ router.post("/contracts", middleware.isLoggedIn, (req, res) => {
     
     Contract.create(newContract, (err, newlyContract) => {
         if (err) {
-            req.flash("error", "Contract couldn't be created. Please try again later.");
+            req.flash("error", "Vertrag konnte nicht erstellt werden. Bitte versuchen Sie es später.");
             console.log(err);
         } else {
             // redirect
-            req.flash("success", "Contract has been added.");
+            req.flash("success", "Vertrag hinzugefügt");
             res.redirect("back");
         }
     });
@@ -89,7 +89,7 @@ router.put("/contracts/:id", middleware.isLoggedIn, (req, res) => {
             console.log(err);
             res.redirect("back");
         } else {
-            req.flash("success", "Contract successfully updated.");
+            req.flash("success", "Vertrag erfolgreich bearbeitet.");
             res.redirect("/contracts/" + req.params.id);
         }
     });
@@ -121,7 +121,7 @@ router.post("/register", (req, res) => {
             return res.render("register");
         } else {
             passport.authenticate("local")(req, res, () => {
-                req.flash("success", "Welcome to JustBecause " + user.username);
+                req.flash("success", "Willkommen auf JustBecause " + user.username);
                 res.redirect("/");
             });
         }
@@ -139,7 +139,7 @@ router.post("/login", passport.authenticate("local",
         successRedirect: "/contracts",
         failureRedirect: "/login",
     }), (req, res) => {
-    req.flash("success", "Successfully logged in.");
+    req.flash("success", "Login erfolgreich.");
 });
 
 // show login form
@@ -156,7 +156,7 @@ router.get("/profile", (req, res) => {
 // logout route
 router.get("/logout", (req, res) => {
     req.logout();
-    req.flash("success", "Succesfully logged out.");
+    req.flash("success", "Logout erfolgreich.");
     res.redirect("/contracts");
 });
 

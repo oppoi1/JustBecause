@@ -1,18 +1,19 @@
 // requirements
-const express        = require("express");
-const app            = express();
-const bodyParser     = require("body-parser");
-const mongoose       = require("mongoose");
+const express        = require("express"),
+      app            = express(),
+      bodyParser     = require("body-parser"),
+      mongoose       = require("mongoose"),
+      passport       = require("passport"),
+      LocalStrategy  = require("passport-local"),
+      methodOverride = require("method-override"),
+      flash          = require("connect-flash"),
+      User           = require("./models/user"),
+      indexRoutes    = require("./routes/index"),
+      commentRoutes  = require('./routes/comments'),
+      Contract       = require("./models/contract"),
+      Comment        = require('./models/comment'),
+      PORT           = 8000;
 mongoose.Promise     = global.Promise;
-const passport       = require("passport");
-const LocalStrategy  = require("passport-local");
-const methodOverride = require("method-override");
-const flash          = require("connect-flash");
-const User           = require("./models/user");
-const indexRoutes    = require("./routes/index"),
-      commentRoutes  = require('./routes/comments');
-const Contract       = require("./models/contract");
-const Comment        = require('./models/comment');
 
 // establish db connection
 mongoose.connect("mongodb://oppoi1:13371337@ds263367.mlab.com:63367/justbecause", {useMongoClient: true});
@@ -71,24 +72,7 @@ app.use("/contracts/:id/comments", commentRoutes);
 //     }
 // });
 
-// seed db with dummy data
-/*Contract.create(
-    {
-        title: "Contract #1",
-        contactPerson: "Mike",
-        inCharge: "Sam"
-    },
-    (err, contract) => {
-        if(err) {
-            console.log(err);
-        } else {
-            console.log("new contract: ");
-            console.log(contract);
-        }
-    });
-*/
-
 // listen to port
-app.listen(8000, () => {
-    console.log("Server started.");
+app.listen(PORT, () => {
+    console.log(`Server started on ${PORT}.`);
 });

@@ -16,7 +16,7 @@ const express        = require("express"),
 mongoose.Promise     = global.Promise;
 
 // establish db connection
-mongoose.connect("mongodb://oppoi1:13371337@ds263367.mlab.com:63367/justbecause", {useMongoClient: true});
+mongoose.connect("mongodb://username:password@ds263367.mlab.com:63367/justbecause", {useMongoClient: true});
 
 // app config
 app.set("view engine", "ejs");
